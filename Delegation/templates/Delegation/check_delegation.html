@@ -1,0 +1,75 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>Delegation - Check delegation </title>
+{% endblock title %}
+
+{% block additionalhead %}
+<link rel="stylesheet" href="{% static '/styles/css/Delegation/delegation.css' %}">
+{% endblock additionalhead %}
+
+{% block maincontent%}
+{{ month|json_script:"month" }}
+{{ year|json_script:"year" }}
+{{ days_in_month|json_script:"days_in_month" }}
+{{ name_of_first_day|json_script:"name_of_first_day" }}
+{{ delegation_for_json|json_script:"delegation_for_json" }}
+
+
+<div id="del2" class="content">
+    <div class="container-fluid">
+    <!--Messages-->
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success text-center" role="alert">
+            {{message}}
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h5 class="card-title">Select dates</h5>
+                    </div>
+                <div class="card-body">
+                    <form method= "POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Month:</label>
+                                    {{form.month|add_class:"form-control"}}
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>Year:</label>
+                                    {{form.year|add_class:"form-control"}}
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-fill pull-right">Check</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+
+           <div class="row top-buffer">
+            <div class="col-md-12">
+            <div id="app-calendar">
+            </div>
+            </div>
+           </div>
+</div>
+{% endblock maincontent%}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Delegation/check_delegation.js' %}"></script>
+{% endblock additionalscript %}

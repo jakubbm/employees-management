@@ -1,0 +1,98 @@
+{% extends 'Main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<title>EM - Add employee position</title>
+{% endblock title %}
+
+{% block maincontent%}
+
+<div id="addi4" class="content">
+    <div class="container-fluid">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success'%}
+            <div class="row d-flex justify-content-center top-buffer">
+                <div class="col-md-12">
+                    <div class="alert alert-success text-center" role="alert">
+                    {{message}}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h5 class="card-title">Add Employee position</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                            {% if form is None %}
+                                <form method= "POST">
+                                {% csrf_token %}
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Select employee:</label>
+                                            {{employee_form.employee|add_class:"form-control"}}
+                                        </div> 
+                                    </div> 
+                                    <div class="col-md-12">
+                                        <div class="form-group"> 
+                                            <label>Select industry:</label>
+                                            {{industry_form.brand|add_class:"form-control"}}
+                                        </div>
+                                    </div>  
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Add</button>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            {% endif %}
+                     
+                            {% if form is not None %}
+                            <div class="col-md-12">
+                                <form method= "POST">
+                                {% csrf_token %}
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Employee</label>
+                                            <input type="text" class="form-control disabled-input" name="employee" value="{{employee_form}}">
+                                       
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Industry:</label>
+                                            <input type="text" class="form-control disabled-input" name="industry" value="{{industry_form}}">
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Select job title</label>
+                                            {{form.job_title|add_class:"form-control"}}
+                                        </div>
+                                    </div>  
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Add</button>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock maincontent%}
+
+

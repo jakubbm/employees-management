@@ -1,0 +1,1 @@
+web: gunicorn EmployessManagement.wsgi --log-file -

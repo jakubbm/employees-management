@@ -1,0 +1,121 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<div class="col-md-12 top-buffer">
+    <div class="card card-tasks">
+        <div class="card-header text-center text-white bg-dark">
+            <h4 class="card-title">Tasks</h4>
+            <p class="card-category">Your current tasks:</p>
+        </div>
+        <div class="card-body ">
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <form method="POST" >
+                            {% csrf_token %}
+                            <td>
+                                <h4>Task:</h4>
+                            </td>
+                            <td>
+                                {{form.sentence|add_class:"form-control"}}
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-info" name="create">Send</button>
+                            </td>
+                        </form>
+                    </tr>
+
+
+                    {% for task in tasks %}
+                    <tr>
+                        <td class="text-left align-middle">
+                            {{ task.date_created }} 
+                        </td>
+
+                        <td class="text-left align-middle">
+                            <div class="task">
+                                {{ task }}
+                            </div>
+                        </td>
+
+                        <td class="text-right">
+                            <div class="d-inline-block">
+                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info edit form-control">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </div>
+
+                            <div class="d-inline-block">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delete" value={{task.id}}>
+                                    <button type="submit" rel="tooltip" class="btn btn-danger delete form-control">
+                                        <i class="fas fa-minus-circle"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+
+                        <form method="POST" class="form-update">
+                            {% csrf_token %}
+                            <input type="hidden" name="update" value={{task.id}}>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <strong>Total tasks:</strong> {{tasks_count}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/Main/todo.js' %}"></script>
+
+
+
+<!--
+<head>
+<link rel="stylesheet" type="text/css" href="{% static '/styles/css/Main/todo.css' %}">
+</head>
+
+<body>
+<div class="center-column">
+<form method="POST">
+    {% csrf_token %}
+    {{form.sentence}}
+    <input class="btn btn-info" type="submit" name = "Create a task">
+</form>
+
+    <div class = "todo-list">
+{% for task in tasks %}
+<div class="item-row">
+    <button type="button" class="btn-sm btn-info update">Update</button>
+    <button type="button" class="btn-sm btn-danger delete">Delete</button>
+
+    {% if task.completed == True %}
+    <s>{{ task }}</s>
+    {% else %}
+    <span> {{task}} </span>
+    {% endif %}
+</div>
+{% endfor %}
+</div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/todo.js' %}"></script>
+</body>
+
+-->

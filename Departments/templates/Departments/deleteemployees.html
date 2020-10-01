@@ -1,0 +1,146 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static%}
+
+{% block title %}
+<title>Departments - Remove employee</title>
+{% endblock title %}
+
+{% block maincontent%}
+<div id="dep14" class="content">
+    <div class="container-fluid">
+
+        {% for department in departments%}
+        <div class="row bottom-buffer">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h4 class="card-title">{{department.name}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row row-amount-removing">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Department Name</label>
+                                    <div class="form-control">
+                                        {{department.name}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <div class="form-control">
+                                        {{department.description}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Name shortcut</label>
+                                    <div class="form-control">
+                                        {{department.name_shortcut}}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Localization</label>
+                                    <div class="form-control">
+                                        {{department.localization}}
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Remove Employee:</label>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark show-button dropdown-toggle" type="button"  title="Only registered employees in this department are shown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Click to unfold 
+                                        </button>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            {% for employee in employees %}
+                                            {% if employee in department.employee_set.all %}
+                                                <button class="dropdown-item emplo">
+                                                    <div>
+                                                        {{employee}}
+                                                    </div>
+                                                    <form method = "POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="employee" value="{{employee.id}}">
+                                                        <input type="hidden" name="department" value="{{department.id}}">
+                                                    </form>
+                                                </button>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center toggle-confirm-row ">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-warning text-center" role="alert">
+            <p><h2>There are not any departments </h2></p>
+            <p><h3>First you have to create a department </h3></p>
+        </div>
+        {% endfor %}
+
+        <!-- Pagination -->
+        {% if departments.has_other_pages %}
+        <ul class="pagination justify-content-center">
+        {% if departments.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ departments.previous_page_number }}">Previous</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+        {% endif %}
+        {% for i in departments.paginator.page_range %}
+            {% if departments.number == i %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ i }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        {% if departments.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ departments.next_page_number }}">Next</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        {% endif %}
+        </ul>
+        {% endif %}
+    
+
+    </div>
+</div>
+
+{% endblock maincontent%}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Departments/addemployee.js' %}"></script>
+{% endblock additionalscript %}

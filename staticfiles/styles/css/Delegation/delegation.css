@@ -1,0 +1,99 @@
+body {
+    margin:0;
+}
+
+#app-calendar{
+    display:grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(6, 1fr);
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+}
+
+#app-calendar2{
+    display:grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(6, 1fr);
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+}
+
+.day {
+    border-bottom: 1px solid #DADCE0;
+    border-left: 1px solid #DADCE0;
+    text-align:center;
+    padding-top:5px;
+    padding-bottom:10px;
+    font-size:15px;
+    cursor:pointer;
+    transition:background-color 300ms,color 300ms;
+    background-color:white;
+    font-weight: bold;
+}
+
+.day:last-child{
+    border-right: 1px solid #DADCE0;
+}
+
+[id='1'],[id='2'],[id='3'],[id='4'],[id='5'],[id='6'],[id='7']{
+    border-top: 1px solid #DADCE0;
+}
+
+.day-hidden{
+    padding-top:5px;
+    font-size:12px;
+    cursor:pointer;
+    transition:background-color 200ms,color 200ms;
+    background-color:transparent;
+}
+
+
+.name {
+    padding-bottom:5px;
+    font-size:15px;
+   
+}
+
+.weekend {
+    background-color:#696c6c;
+    color:white;
+}
+
+.selected {
+    background-color:#E8E8E8;
+    color:black;
+}
+
+.hide{
+    display:none;
+}
+
+.delegation{
+   background-color:#D6BA73;
+}
+
+.delegation2{
+    background-color:#B4A784;
+ }
+
+.delegation-day{
+    font-size:0.7rem;
+    font-weight: normal;
+    margin-top:8px;
+    padding:4px 0;
+    border-radius:5px;
+}
+
+.selected-day{
+    transform:scale(1.25, 1.25);
+    transition:transform 1s;
+    margin:12%;
+    border-radius:8px;
+    background-color: #A89785;
+}
+
+

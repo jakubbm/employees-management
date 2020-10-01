@@ -1,0 +1,127 @@
+{% extends 'Main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<title>Profile - Profile</title>
+{% endblock title %}
+
+{% block maincontent%}
+
+<div id="prof1" class="content">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6 text-center">
+                <div id="user-card" class="card card-user">
+                    <div class="card-image">
+                        <img class="prof-image" src="{{ request.user.employee.profile_picture.url }}" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="title">{{ request.user.employee.first_name }} {{ request.user.employee.last_name }}</h3>
+                        </div>
+                        <p class="description top-buffer">
+                            <i class="fas fa-user"></i>
+                            <strong>Username:</strong> {{ request.user.username }} 
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-at"></i>
+                            <strong>Email:</strong> {{ request.user.email }} 
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-calendar"></i>
+                            <strong>Date of birth:</strong> {{ request.user.employee.date_of_birth|default_if_none:"No statement made!" }}
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-phone-alt"></i>
+                            <strong>Phone number:</strong> {{ request.user.employee.phone_number|default_if_none:"No statement made!"  }} 
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-address-card"></i>
+                            <strong>Address:</strong> {{ request.user.employee.address|default_if_none:"No statement made!"  }}
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-map-marked"></i>
+                            <strong>Zip-code:</strong> {{ request.user.employee.zip_code|default_if_none:"No statement made!" }} 
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-city"></i>
+                            <strong>City:</strong> {{ request.user.employee.city|default_if_none:"No statement made!" }}
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-globe-europe"></i>
+                            <strong>Country:</strong> {{ request.user.employee.country |default_if_none:"No statement made!"}}
+                         </p>
+
+                        <p class="description">
+                            <i class="fas fa-id-badge"></i>
+                            <strong>Badge number:</strong> {{ request.user.employee.badge }} 
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-briefcase"></i>
+                            <strong>Industry:</strong> 
+                            {% if request.user.employee.job_title.industry %}
+                                {{ request.user.employee.job_title.industry }}
+                            {% else %}
+                                Not assigned !
+                            {% endif %}
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-user-tie"></i>
+                            <strong>Job title:</strong> 
+                            {% if request.user.employee.job_title.job_title %}
+                                {{ request.user.employee.job_title.job_title }}
+                            {% else %}
+                                Not assigned !
+                            {% endif %}
+                            
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-building"></i>
+                            <strong>Department:</strong> {{ request.user.employee.department|default_if_none:"Not assigned"  }} 
+                        </p>
+
+                        <p class="description">
+                            <i class="fas fa-file-alt"></i>
+                            <strong>Current Projects:</strong> 
+                            {% if request.user.employee.employees_set.all %}
+                            {% for project in request.user.employee.employees_set.all%}
+                                {{project }},
+                            {% endfor %}
+                            {% else %}
+                                Not assigned !
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success'%}
+            <div class="row d-flex justify-content-center top-buffer">
+                <div class="col-md-6">
+                    <div class="alert alert-success text-center" role="alert">
+                    {{message}}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock maincontent%}
+

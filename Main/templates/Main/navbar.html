@@ -1,0 +1,39 @@
+{% load static %}
+
+<header class="navbar">
+    <button id="hamburger-menu">
+        <i class="fas fa-arrow-left"></i>
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="time"></div>
+
+    <button data-toggle="modal" data-target="#logoutModal">
+        <i class="fas fa-sign-out-alt">Log Out</i>
+    </button>
+</header>
+
+
+<!-- Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLongTitle">Log out</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3>Do you really want to logout ?</h3>
+        <h6>Did you remember to end your work time?</h6>
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'Users:logout' %}">
+            <button type="button" class="btn btn-primary">Log Out</button>
+          </a>   
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

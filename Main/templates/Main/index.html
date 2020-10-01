@@ -1,0 +1,188 @@
+{% extends 'Main/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Employess Management</title>
+{% endblock title %}
+
+{% block additionalhead %}
+<link rel="stylesheet" href="{% static '/styles/css/Main/index.css' %}">
+{% endblock additionalhead %}
+
+
+{% block maincontent%}
+<div id="main1" class="content">
+    <div class="container-fluid">
+        {% if birthday == True %}
+        <div id="birthday" class="d-flex justify-content-center row bottom-buffer">
+            <img src="{% static '/other/happy-birthday.png' %}">
+        </div>
+        {% endif %}
+
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'info'%}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-secondary text-center" role="alert">
+                    {{message}}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card ">
+                    <div class="card-header text-center text-white bg-dark">
+                        <p><h4 class="card-title">Start your work</h4></p>
+                        
+                    </div>
+                    <div class="card-body ">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 text-center">
+                                <button title="Start" type="button" class="start-stop">
+                                    <img class="time-button" src="{% static '/styles/img/Main/start.png'%}">
+                                </button>
+                            </div> 
+
+                            <div class="col-md-8 text-left">
+                                <h5>Please press the button to register the start of work</h5>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center toggle-time-row hide-show top-buffer">
+                            <div class="col-md-7 text-right">
+                                <h6>Do you confirm ?</h6>
+                            </div>
+                            <div class="col-md-5 text-left">
+                                <div class="d-inline-block">
+                                    <form method = "POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="start-work">
+                                        <button type="submit" rel="tooltip" title="Confirm" class="btn btn-success form-control">
+                                            <i class="fas fa-check-square"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="d-inline-block">
+                                    <button type="button" rel="tooltip" title="Cancel" class="btn btn-danger form-control cancel">
+                                        <i class="fas fa-window-close"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card ">
+                    <div class="card-header text-center text-white bg-dark">
+                        <p><h4 class="card-title">End Your Work</h4></p>
+                    </div>
+                    <div class="card-body ">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 text-center">
+                                <button title="Stop" type="button" class="start-stop">
+                                    <img class="time-button" src="{% static '/styles/img/Main/stop.png'%}">
+                                </button>
+                            </div>
+
+                            <div class="col-md-8 text-left">
+                                <h5>Please press the button to register the end of work</h5>
+                            </div>
+                        </div>
+
+                            <div class="row align-items-center toggle-time-row hide-show top-buffer">
+                                <div class="col-md-7 text-right">
+                                    <h6>Do you confirm ?</h6>
+                                </div>
+                                <div class="col-md-5">
+
+                                    <div class="d-inline-block">
+                                        <form method = "POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="end-work">
+                                            <button type="submit" class="btn btn-success form-control">
+                                                <i class="fas fa-check-square"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                    <div class="d-inline-block">
+                                        <button type="button" rel="tooltip" class="btn btn-danger form-control cancel">
+                                            <i class="fas fa-window-close"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card ">
+                    <div class="card-header text-center text-white bg-dark">
+                        <p><h4 class="card-title">Today status of your work:</h4></p>
+                    </div>
+                    <div class="card-body ">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 text-center">
+                                <div class="start-stop">
+                                    <img src="{% static '/styles/img/Main/status.png'%}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-8 text-left">
+                                {% if status_of_start is None %}
+                                <h5>Start work: Not registered</h5>
+                                {% else %}
+                                <h5>Start work: {{ status_of_start }}</h5>
+                                {% endif%}
+
+                                {% if status_of_end is None %}
+                                <h5>End work: Not registered</h5>
+                                {% else %}
+                                <h5>End work: {{ status_of_end }}</h5>
+                                {% endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'warning'%}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger text-center" role="alert">
+                {{message}}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        <!-- Add to do -->
+        {% include './todo.html'%}
+    </div>
+</div>
+
+{% endblock maincontent%}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Main/index.js' %}"></script>
+{% endblock additionalscript %}
+
+
+
+

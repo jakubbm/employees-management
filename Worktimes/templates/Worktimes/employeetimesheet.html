@@ -1,0 +1,127 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>EM - employee timesheet</title>
+{% endblock title %}
+
+{% block maincontent%}
+{{ reports_for_json|json_script:"chart-data" }}
+
+<div id='addi1' class="content">
+    <div class="container-fluid">
+        <div class="row bottom-buffer">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h4 class="card-title">Select employee:</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <form method= "POST">
+                                {% csrf_token %}
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Select employee:</label>
+                                            {{employee_form.employee|add_class:"form-control"}}
+                                        </div> 
+                                    </div>  
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h5 class="card-title">Select dates</h5>
+                    </div>
+                <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Start time:</label>
+                                    <input type="date" id="start_date" name="start_date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>End Time:</label>
+                                    <input type="date" id="end_date" name="end_date" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-fill pull-right">Check</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!--Messages-->
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'warning' %}
+                <div class="alert alert-warning text-center top-buffer" role="alert">
+                {{message}}
+                </div>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        
+        {% if reports is not None %}
+        <div class="row top-buffer">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h5 class="card-title">Chart</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="hours_chart"></canvas>
+                    </div>   
+                </div>
+            </div>
+        </div>
+
+        <div class="row top-buffer">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Date</th>
+                              <th scope="col">Start of work</th>
+                              <th scope="col">End of work</th>
+                              <th scope="col">Hours in a day</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for report in reports%}
+                        <tr>
+                          <td>{{ report.date }}</td>
+                          <td>{{ report.start_work }}</td>
+                          <td>{{ report.end_work }}</td>
+                          <td>{{ report.hours_in_day }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                      {% endif %}
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock maincontent%}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Worktimes/hours_chart.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/Vacation/book_vacation.js' %}"></script>
+{% endblock additionalscript %}

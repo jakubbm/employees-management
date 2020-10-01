@@ -1,0 +1,39 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>EM - Message board </title>
+{% endblock title %}
+
+{% block additionalhead %}
+<link rel="stylesheet" href="{% static '/styles/css/Messageboard/messageboard.css' %}">
+{% endblock additionalhead%}
+
+{% block maincontent %}
+{{user_id|json_script:"user_id" }}
+
+<div id="board1" class="content">
+  <div id="title">
+    <h3>Message board</h3>
+  </div>
+
+  <div id="content">
+   
+  </div>
+
+  <div id="footer" class="d-block text-right mt-3">
+    <input id="input" type="text" placeholder="Please input your message here">
+    <button id="post" type="submit">Post</button>
+  </div>
+  
+</div>
+
+{% endblock maincontent%}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Messageboard/message_board.js' %}"></script>
+{% endblock additionalscript %}
+
+
+

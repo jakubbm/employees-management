@@ -1,0 +1,163 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>Departments - show departments</title>
+{% endblock title %}
+
+{% block maincontent%}
+
+<div id="dep11" class="content">
+    <div class="container-fluid">
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success text-center" role="alert">
+                {{message}}
+                </div>
+            {% elif message.tags == 'warning' %}
+                <div class="alert alert-danger text-center" role="alert">
+                {{message}}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    
+        {% for department in departments%}
+        <div class="card bottom-buffer">
+            <div class="card-header text-center text-white bg-dark">
+                <h4 class="card-title">{{department.name}}</h4>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <div class="form-control">
+                                {{department.name}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <div class="form-control">
+                                {{department.description}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Name shortcut</label>
+                            <div class="form-control">
+                                {{department.name_shortcut}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Director</label>
+                            <div class="form-control">
+                                {% if department.director.director_name %}
+                                    {{department.director.director_name}}
+                                {% else %}
+                                    No Director assigned!
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Localization</label>
+                            <div class="form-control">
+                                {{department.localization}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Employees: <strong>{{department.employee_set.all.count}}</strong></label>
+                            <p><button type="button" class="btn btn-outline-dark show-button">Click to show/hide</button></p>
+                        </div>
+                    </div>
+                </div>
+           
+                <!-- Create drop-down employees table -->
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-6 text-center">
+                            <table class="table table-sm tohide hide-show-table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Employees:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for employee in department.employee_set.all %}
+                                    <tr>
+                                        <th scope="col">{{employee}}</th>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info text-center" role="alert">
+            <p><h2>There are not any departments </h2></p>
+        </div>
+        {% endfor %}
+
+        <!-- Pagination -->
+        {% if departments.has_other_pages %}
+            <ul class="pagination justify-content-center">
+            {% if departments.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ departments.previous_page_number }}">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+            {% endif %}
+            {% for i in departments.paginator.page_range %}
+                {% if departments.number == i %}
+                    <li class="page-item active">
+                        <a class="page-link" href="#">{{ i }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if departments.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ departments.next_page_number }}">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            {% endif %}
+            </ul>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock maincontent%}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Departments/department.js' %}"></script>
+{% endblock additionalscript %}

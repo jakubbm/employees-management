@@ -1,0 +1,132 @@
+{% extends 'Main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<title>Projects - Modify project</title>
+{% endblock title %}
+
+{% block maincontent%}
+
+<div id='proj6' class="content">
+    <div class="container-fluid">
+        <!-- Select project-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h4 class="card-title">Modify project</h4>
+                    </div>
+                <div class="card-body">
+                    {% if create_project_form is not None %}
+                    <div class="row">
+                        <div class="col-md-12 pr-1">
+                            <div class="form-group">
+                                <label>Selected project:</label>
+                                <div class="form-control">
+                                    {{select_project_form.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <form method= "POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12 pr-1">
+                                <div class="form-group">
+                                    <label>Select project:</label>
+                                        {{select_project_form.project|add_class:"form-control"}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-info btn-fill pull-right">Select</button>
+                        <div class="clearfix"></div>
+                    </form>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modify project-->
+        {% if create_project_form is not None %}
+        <div class="row top-buffer">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h4 class="card-title">Modify project</h4>
+                    </div>
+                <div class="card-body">
+                    <form method= "POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12 pr-1">
+
+                                <div class="form-group">
+                                    <label>Project Name</label>
+                                    {{create_project_form.name|add_class:"form-control"}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 pr-1">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    {{create_project_form.description|add_class:"form-control"}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    {{create_project_form.company_name|add_class:"form-control"}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 pr-1">
+                                <div class="form-group">
+                                    <label>Start Time</label>
+                                    {% render_field create_project_form.start_time class="form-control" placeholder="YYYY-MM-DD" %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>End Time</label>
+                                    {% render_field create_project_form.end_time class="form-control" placeholder="YYYY-MM-DD" %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-info btn-fill pull-right">Modify</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!--Messages-->
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <div class="alert alert-danger text-center" role="alert">
+                    {{message}}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock maincontent%}

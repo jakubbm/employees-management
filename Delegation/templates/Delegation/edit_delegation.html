@@ -1,0 +1,170 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>Delegation - Edit delegation </title>
+{% endblock title %}
+
+{% block additionalhead %}
+<link rel="stylesheet" href="{% static '/styles/css/Delegation/delegation.css' %}">
+{% endblock additionalhead %}
+
+{% block maincontent%}
+<div id="del4" class="content">
+    <div class="container-fluid">
+
+        <!--Messages-->
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success text-center" role="alert">
+                {{message}}
+                </div>
+            {% endif %}
+            {% if message.tags == 'warning' %}
+            <div class="alert alert-danger text-center" role="alert">
+            {{message}}
+            </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        {% for delegation in delegations%}
+        <div class="row bottom-buffer">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-white bg-dark text-center">
+                        <h4 class="card-title">assssswww</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Destination</label>
+                                    <div class="form-control">
+                                        {{delegation.destination}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Company</label>
+                                    <div class="form-control">
+                                        {{delegation.company}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                          
+
+                        <div class="row row-amount">
+                            <div class="col-md-4 text-center">
+                                <div class="form-group">
+                                    <label>Check Dates</label>
+                                        <div class="dropdown">
+                                            <button class="btn btn-outline-dark show-button dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="
+                                            Employees already registered are not shown">
+                                                Click to unfold 
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                {% for date in delegation.date.all %}
+                                                    <button class="dropdown-item emplo">
+                                                        <div>
+                                                            {{ date }}
+                                                        </div>
+                                                        <form method = "POST">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="employee" value="{{employee.id}}">
+                                                            <input type="hidden" name="project" value="{{active.id}}">
+                                                        </form>
+                                                    </button>    
+                                                {% endfor %}
+                                            </div>    
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 text-center">
+                                <div class="form-group">
+                                    <label>Add Employee:</label>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark show-button dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="
+                                        Employees already registered are not shown">
+                                            Click to unfold 
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            {% for employee in employees %}
+                                            {% if employee not in delegation.employee.all %}
+                                                <button class="dropdown-item employee-add">
+                                                    <div>
+                                                        {{employee}}
+                                                    </div>
+                                                    <form method = "POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="add" value="true">
+                                                        <input type="hidden" name="employee" value="{{employee.id}}">
+                                                        <input type="hidden" name="delegation" value="{{delegation.id}}">
+                                                    </form>
+                                                </button>       
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 text-center">
+                                <div class="form-group">
+                                    <label>Remove Employee:</label>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark show-button dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="
+                                        Employees already registered are not shown">
+                                            Click to unfold 
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            {% for employee in employees %}
+                                            {% if employee in delegation.employee.all %}
+                                                <button class="dropdown-item employee-remove">
+                                                    <div>
+                                                        {{employee}}
+                                                    </div>
+                                                    <form method = "POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="employee" value="{{employee.id}}">
+                                                        <input type="hidden" name="delegation" value="{{delegation.id}}">
+                                                    </form>
+                                                </button>       
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 text-center toggle-confirm-row">
+
+                            </div>   
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-warning text-center" role="alert">
+            <p><h2>There are not any projects </h2></p>
+            <p><h3>First you have to create a project </h3></p>
+        </div>
+        {% endfor %}
+
+
+
+
+    </div>
+</div>
+{% endblock maincontent%}
+
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Delegation/edit_delegation_members.js' %}"></script>
+{% endblock additionalscript %}

@@ -1,0 +1,66 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  {% block title %}
+  
+  {% endblock title %}
+
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--favicon-->
+  <link rel="shortcut icon" type="image/png" href="{% static '/other/favicon.ico' %}"/>
+
+  <!--Own css-->
+  <link rel="stylesheet" type="text/css" href="{% static '/styles/css/Users/forms.css' %}">
+  
+  <!--Third app css/fonts -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  {% block typeofbox %}
+
+  {% endblock typeofbox %}
+
+  <!--avatar-->
+  <img src="{% static '/styles/img/Users/user.png'%}" class="avatar">
+
+
+  <div class = "box1">
+    {% block box1%}
+
+    {% endblock box1 %}
+  </div>
+
+    {% block box2 %}
+
+    {% endblock box2 %}
+
+
+  <div class = "box3">
+      <div class="box31">
+        {% block box31 %}
+
+        {% endblock box31 %}
+      </div>
+
+      <div class="box32">
+        {% block box32 %}
+
+        {% endblock box32 %}
+      </div>
+  </div>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+

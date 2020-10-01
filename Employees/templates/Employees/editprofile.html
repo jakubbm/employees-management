@@ -1,0 +1,217 @@
+{% extends 'Main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<title>Profile - Edit profile</title>
+{% endblock title %}
+
+{% block maincontent%}
+
+<div id="prof2" class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h5 class="card-title">Edit Your Username Credential</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control disabled-input" name="username" value="{{request.user.username}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <form method= "POST">
+                                {% csrf_token %}
+                                    <div class="form-group">
+                                        <label>Email address</label>
+                                        {{form_user.email|add_class:"form-control"}}
+                                    </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                                <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row top-buffer bottom-padding">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h5 class="card-title">Edit Your Employee Profile Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <div class="form-control disabled-input">
+                                         {{request.user.employee.first_name}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <div class="form-control disabled-input">
+                                         {{request.user.employee.last_name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form method= "POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-3 pr-1">
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        {{form_employee.gender|add_class:"form-control"}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 px-1">
+                                    <div class="form-group">
+                                        <label>Nationality</label>
+                                        {{form_employee.nationality|add_class:"form-control"}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 pl-1">
+                                    <div class="form-group">
+                                        <label>Date of birth</label>
+                                        {% if form_employee.date_of_birth.errors %}
+                                        {{form_employee.date_of_birth|add_class:"form-control is-invalid"}}
+                                        <div class="invalid-feedback">
+                                            {{ form_employee.date_of_employment.errors }}
+                                        </div>
+                                        {% else %}
+                                        {% render_field form_employee.date_of_birth class="form-control" placeholder="YYYY-MM-DD" %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 pl-1">
+                                    <div class="form-group">
+                                        <label>Marital Status</label>
+                                        {{form_employee.marital_status|add_class:"form-control"}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        {{form_employee.address|add_class:"form-control"}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        {{form_employee.city|add_class:"form-control"}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 pl-1">
+                                    <div class="form-group">
+                                        <label>Postal Code</label>
+                                        {{form_employee.zip_code|add_class:"form-control"}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 px-1">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        {{form_employee.country|add_class:"form-control"}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Phone number</label>
+                                        {% if form_employee.phone_number.errors %}
+                                            {{form_employee.phone_number|add_class:"form-control is-invalid"}}
+                                            <div class="invalid-feedback">
+                                                {{ form_employee.phone_number.errors }}
+                                            </div>
+                                        {% else %}
+                                        {{form_employee.phone_number|add_class:"form-control"}}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Education</label>
+                                        {{form_employee.education_degree|add_class:"form-control"}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 pl-1">
+                                    <div class="form-group">
+                                        <label>Diploma number</label>
+                                        {{form_employee.diploma_number|add_class:"form-control"}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 pl-1">
+                                    <div class="form-group">
+                                        <label>Date of employment:</label>
+                                        {% if form_employee.date_of_employment.errors %}
+                                            {{form_employee.date_of_employment|add_class:"form-control is-invalid"}}
+                                            <div class="invalid-feedback">
+                                                {{ form_employee.date_of_employment.errors }}
+                                            </div>
+                                        {% else %}
+                                        {% render_field form_employee.date_of_employment class="form-control" placeholder="YYYY-MM-DD" %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Profile picture</label>
+                                        {{form_employee.profile_picture|add_class:"form-control-file"}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% if form_employee.errors %}
+                <div class="alert alert-danger text-center">
+                <strong>Form have errors, Please check a form</strong>
+                </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock maincontent%}
+

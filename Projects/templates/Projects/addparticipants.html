@@ -1,0 +1,155 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>Projects - add employee</title>
+{% endblock title %}
+
+{% block additionalhead %}
+<link rel="stylesheet" href="{% static '/styles/css/Main/index.css' %}">
+
+
+{% endblock additionalhead %}
+
+{% block maincontent%}
+<div id='proj3' class="content">
+    <div class="container-fluid">
+        {% for active in projects_active%}
+        <div class="row bottom-buffer">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-white bg-dark text-center">
+                        <h4 class="card-title">{{active.name}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <div class="form-control">
+                                        {{active.name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <div class="form-control">
+                                        {{active.company_name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-amount-adding">
+                            <div class="col-md-6 text-center">
+                                <div class="form-group">
+                                    <label>Add Employee:</label>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark show-button dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="
+                                        Employees already registered are not shown">
+                                            Click to unfold 
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            {% for employee in employees %}
+                                            {% if employee not in active.employee.all %}
+                                                <button class="dropdown-item emplo">
+                                                    <div>
+                                                        {{employee}}
+                                                    </div>
+                                                    <form method = "POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="employee" value="{{employee.id}}">
+                                                        <input type="hidden" name="project" value="{{active.id}}">
+                                                    </form>
+                                                </button>       
+                                            {% endif %}
+                                        
+                                            {% endfor %}
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div class="form-group">
+                                    <label>Add Teamleader:</label>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark show-button dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Employee must be registered in the project to become a team leader">
+                                            Click to unfold 
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            {% for employee in employees %}
+                                            {% if employee in active.employee.all %}
+                                                <button class="dropdown-item teamld">
+                                                    <div>
+                                                        {{employee}}
+                                                    </div>
+                                                    <form method = "POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="teamld" value="{{employee.id}}">
+                                                        <input type="hidden" name="project" value="{{active.id}}">
+                                                    </form>
+                                                </button>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center toggle-confirm-row">
+
+                            </div>   
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-warning text-center" role="alert">
+            <p><h2>There are not any projects </h2></p>
+            <p><h3>First you have to create a project </h3></p>
+        </div>
+        {% endfor %}
+        <!-- Pagination -->
+        {% if projects_active.has_other_pages %}
+        <ul class="pagination justify-content-center">
+        {% if projects_active.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ projects_active.previous_page_number }}">Previous</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+        {% endif %}
+        {% for i in projects_active.paginator.page_range %}
+            {% if projects_active.number == i %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ i }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        {% if projects_active.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ projects_active.next_page_number }}">Next</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock maincontent%}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Projects/projects.js' %}"></script>
+{% endblock additionalscript %}

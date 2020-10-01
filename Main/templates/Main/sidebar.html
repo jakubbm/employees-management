@@ -1,0 +1,207 @@
+{% load static %}
+
+<nav class="sidebar">
+  <div class="sidebar-menu">
+    <div class="profile">
+      <img src="{{ request.user.employee.profile_picture.url }}" alt="">
+      <p>{{ request.user.employee.first_name}} {{ request.user.employee.last_name}}</p>
+    </div>
+
+
+  <ul>
+    <li class="mainlist main1"><a href="{% url 'Main:main' %}">
+      <i class="fas fa-home"></i>
+      Main page</a></li>
+
+    <!-- Profile-->
+    <li class="mainlist unfold">
+      <a href="#">
+        <i class="fas fa-user"></i>
+        Your profile
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="tounfold">
+        <li class="list prof1"><a href="{% url 'Employees:profile' %}">
+          <i class="fas fa-id-card"></i>
+          Profile overlook</a></li>
+        <li class="list prof2"><a href="{% url 'Employees:edit_profile' %}">
+          <i class="fas fa-user-edit"></i>
+          Edit profile</a></li>
+        <li class="list prof3"><a href="{% url 'Users:password_change' %}">
+          <i class="fas fa-key"></i>
+          Change password</a></li>
+        <li class="list prof4">
+          <a href="{% url 'Employees:access_request' %}">
+            <i class="fas fa-layer-group"></i>
+          Make the access requests</a></li>
+      </ul>
+    </li>
+
+    <!-- Worktime-->
+    <li class="mainlist unfold">
+      <a href="#">
+        <i class="fas fa-user-clock"></i>
+        Work Time
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="tounfold">
+        <li class="list work1"><a href="{% url 'Worktimes:worktime' %}">
+          <i class="fas fa-business-time"></i>
+          Timesheets</a></li>
+        <li class="list work2"><a href="{% url 'Worktimes:generate_timesheet' %}">
+          <i class="fas fa-file-pdf"></i>
+          Generate Timesheets</a></li>
+      </ul>
+    </li>
+
+    <!-- Department-->
+    <li class="mainlist unfold">
+      <a href="#">
+        <i class="fas fa-building"></i>
+        Departments
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="tounfold">
+        <li class="list dep11"><a href="{% url 'Departments:departments' %}">
+          <i class="fas fa-folder"></i>
+          Check departments</a></li>
+        <li class="list dep13"><a href="{% url 'Departments:add_employees' %}">
+          <i class="fas fa-user-plus"></i>
+          Add employee</a></li>
+        <li class="list dep14"><a href="{% url 'Departments:delete_employees' %}">
+          <i class="fas fa-user-minus"></i>
+          Delete employee</a></li>
+        <li class="list dep15"><a href="{% url 'Departments:modify_director' %}">
+          <i class="fas fa-street-view"></i>
+          Modify director</a></li>
+        <li class="list dep12"><a href="{% url 'Departments:create_department' %}">
+          <i class="fas fa-folder-plus"></i>
+          Create departments</a></li>
+        <li class="list dep16"><a href="{% url 'Departments:modify_department' %}">
+          <i class="fas fa-exchange-alt"></i>
+          Modify departments</a></li>
+      </ul>
+    </li>
+
+    <!-- Vacations-->
+    <li class="mainlist unfold">
+      <a href="#">
+        <i class="far fa-calendar-alt"></i>
+        Vacations
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="tounfold">
+        <li class="list vac1"><a href="{% url 'Vacation:my_vacation' %}">
+          <i class="fas fa-calendar-check"></i>
+          My vacation</a></li>
+        <li class="list vac2"><a  href="{% url 'Vacation:check_vacation' %}">
+          <i class="fas fa-calendar"></i>
+          Check vacation</a></li>
+        <li class="list vac3"><a href="{% url 'Vacation:book_vacation' %}">
+          <i class="fas fa-calendar-plus"></i>
+          Book vacation</a></li>
+
+      </ul>
+    </li>
+
+    <!-- Delegation-->
+    <li class="mainlist unfold">
+      <a href="#">
+        <i class="fas fa-plane"></i>
+        Delegations
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="tounfold">
+        <li class="list del1"><a href="{% url 'Delegation:my_delegation' %}">
+          <i class="fas fa-map-marked-alt"></i>
+          My delegation</a></li>
+        <li class="list del2"><a  href="{% url 'Delegation:check_delegation' %}">
+          <i class="fas fa-map"></i>
+          Check delegation</a></li>
+        <li class="list del3"><a href="{% url 'Delegation:manage_delegation' %}">
+          <i class="fas fa-plus"></i>
+          Add delegation</a></li>
+        <li class="list del4"><a href="{% url 'Delegation:edit_delegation' %}">
+          <i class="fas fa-edit"></i>
+          Edit delegation members</a></li>
+        <li class="list del5"><a href="{% url 'Delegation:delete_delegation' %}">
+          <i class="fas fa-minus"></i>
+            Delete delegation</a></li>
+
+      </ul>
+    </li>
+
+    <!-- Project-->
+    <li class="mainlist unfold">
+      <a href="#">
+        <i class="fas fa-briefcase"></i>
+        Projects
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="tounfold">
+        <li class="list proj1" ><a href="{% url 'Projects:projects' %}">
+          <i class="fas fa-list-alt"></i>
+          Check projects</a></li>
+        <li class="list proj2"><a href="{% url 'Projects:create_project' %}">
+          <i class="fas fa-plus-square"></i>
+          Create project</a></li>
+        <li class="list proj6"><a href="{% url 'Projects:modify_project' %}">
+          <i class="fas fa-exchange-alt"></i>
+          Modify project</a></li>
+        <li class="list proj5"><a href="{% url 'Projects:finish_project' %}">
+          <i class="fas fa-check-square"></i>
+          Finish project</a></li>
+          <li class="list proj3"><a href="{% url 'Projects:add_participants' %}">
+            <i class="fas fa-user-plus"></i>
+          Add employee</a></li>
+        <li class="list proj4"><a href="{% url 'Projects:delete_participants' %}">
+          <i class="fas fa-user-minus"></i>
+          Delete employee</a></li>
+      </ul>
+    </li>
+
+    <!-- Message board -->
+    <li class="list board1">
+      <a id="mb" href="{% url 'Messageboard:message_board' %}">
+      <i class="far fa-comment-dots"></i>
+      <i id="quantity"></i>
+      Message board</a></li>
+    
+    <!-- Chech employee -->
+    <li class="mainlist check"><a href="{% url 'Employees:check_employee' %}">
+      <i class="fas fa-search"></i>
+      Check employee</a></li>
+    
+    <!-- Restricted Functions-->
+    <li class="mainlist unfold">
+      <a href="#">
+        <i class="fas fa-user-cog"></i>
+        Restricted Functions
+        <span class="fas fa-caret-down"></span>
+      </a>
+      <ul class="tounfold">
+        <li class="list addi1"><a href="{% url 'Worktimes:employee_timesheet' %}">
+          <i class="fas fa-unlock"></i>
+          Check employee timesheet</a></li>
+        <li class="list addi2">
+          <a href="{% url 'Employees:access_request_list' %}">
+            <i class="fas fa-unlock"></i>
+          List of employees requests</a></li>
+        <li class="list addi3"><a href="{% url 'Employees:modify_permissions' %}">
+          <i class="fas fa-unlock"></i>
+          Modify employee permissions</a></li>
+        <li class="list addi4"><a href="{% url 'Employees:employee_position' %}">
+          <i class="fas fa-unlock"></i>
+          Add employee position</a></li>
+      </ul>
+    </li>
+      
+    <!-- FAQ -->
+    <li class="mainlist faq"><a href="{% url 'Main:faq' %}">
+      <i class="fas fa-info-circle"></i>
+      FAQ</a></li>
+  </ul>
+  </div>
+</nav>
+
+

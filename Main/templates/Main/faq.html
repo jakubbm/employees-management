@@ -1,0 +1,59 @@
+{% extends 'Main/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>EM - FAQ</title>
+{% endblock title %}
+
+
+{% block maincontent%}
+<div id="faq" class="content">
+    <div class="container-fluid">
+        <div class="card w-100">
+            <div class="card-header text-center text-white bg-dark">
+                <h4>FAQ</h4>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-center"><h5><strong>Three main access groups:</strong></h5>
+                <p>Standard – automatically granted upon employee registration</p>
+                <p>Manager – full rights, excepted creating and modifying  company departments and their directors</p>
+                <p>Director – full rights</p>
+
+                <p>Only users from the groups: "manager", "director" have access to the "restricted function" tab. If an 
+                access attempt is made by user from the 
+                standard group, the content of the tab will not be displayed, information that access is denied will be displayed</p>
+
+                <p>When user try to edit the remaining tabs to which the user has no rights, the content will be displayed, 
+                it will be possible to go through the available functionalities, but they will not be performed in the database,
+                 about which the user will be informed about the lack of appropriate permissions</p>
+
+                <p>Adding authorizations for individual users is possible only down the hierarchy. This means that users from 
+                the "manager" group can only add permission to the same group. Users from the "director" group can add rights
+                to the groups: "manager", "director".</p>
+                </li>
+              <li class="list-group-item text-center"><h5><strong>Work time:</strong></h5>
+                <p>On the home page, after logging in by an employee, 3 windows are displayed, used to record the time of starting work, ending work, and the current status of work on a given day.</p>
+                <p>After selecting the appropriate icon and confirming the selection, the start or end of work is saved in the database along with the IP address.</p>
+                <p>When registering working time, it is checked whether the employee performs the operation in the right order, which makes it impossible, for example, to register the end of work before registering its commencement. If the operation is performed in an incorrect order, a message informing about the correct sequence is displayed.</p>
+                <p>After recording the beginning and end of work on a given day, the hourly working time is rounded up to 15 minutes.</p>
+            </li>
+              <li class="list-group-item text-center"><h5><strong>Message board:</strong></h5>
+                <p>Message board is a chat room where all users can post messages</p>
+                <p>Messages are kept in the database for 7 days from the date of sending and then they are deleted.</p>
+                <p>On the navigation menu, next to the message board name, there is a number that indicates the number of new messages since the last visit to the message board tab. The number is reset every time you log out of the portal</p>
+            </li>
+              
+            </ul>
+          </div>
+    </div>
+</div>
+
+{% endblock maincontent%}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Main/index.js' %}"></script>
+{% endblock additionalscript %}
+
+
+
+

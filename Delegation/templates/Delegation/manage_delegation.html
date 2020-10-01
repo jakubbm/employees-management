@@ -1,0 +1,95 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>Delegation - Manage delegation </title>
+{% endblock title %}
+
+{% block additionalhead %}
+<link rel="stylesheet" href="{% static '/styles/css/Delegation/delegation.css' %}">
+{% endblock additionalhead %}
+
+{% block maincontent%}
+<div id="del3" class="content">
+    <div class="container-fluid">
+        <!--Messages-->
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'warning' %}
+                <div class="alert alert-danger" role="alert">
+                {{message}}
+                </div>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h5 class="card-title">Create delegation:</h5>
+                    </div>
+                <div class="card-body">
+                    <form method= "POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Start time:</label>
+                                    <input type="date" id="start_date" name="start_date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>End Time:</label>
+                                    <input type="date" id="end_date" name="end_date" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Country:</label>
+                                    {{ destination_form.country|add_class:"form-control" }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>City:</label>
+                                    {{ destination_form.city|add_class:"form-control" }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Company:</label>
+                                    {{ company_form.company|add_class:"form-control" }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Employee:</label>
+                                    {{ employee_form.employees|add_class:"form-control" }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-info btn-fill pull-right">Create</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock maincontent%}
+
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Delegation/mange_delegation.js' %}"></script>
+{% endblock additionalscript %}

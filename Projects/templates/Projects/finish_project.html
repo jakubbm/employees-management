@@ -1,0 +1,66 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>Projects - finish project</title>
+{% endblock title %}
+
+{% block maincontent%}
+
+
+<div id='proj5' class="content">
+    <div class="container-fluid">
+<!--Active projects-->
+        <div class="card">
+            <div class="card-header text-center text-white bg-dark">
+                <h4 class="card-title">Active Projects</h4>
+            </div>
+            <div class="card-body">
+                <div class="row text-center d-flex justify-content-center">
+                {% for active in projects_active%}
+                <div class="col-sm-5 bottom-buffer">
+                    <div class="card">
+                        <div class="card-body bg-dark">
+                            <div class="row">
+                                <div class="col-sm-6 text-right">
+                                    <h5 class="card-title text-white">Project name: </h5>
+                                    <p class="card-text text-white">Company:</p>
+                                    <p class="card-text text-white">Description:</p>
+                                </div>    
+
+                                <div class="col-sm-6 text-left">
+                                    <h5 class="card-title text-success">{{active.name}}</h5>
+                                    <p class="card-text text-success">{{active.company_name}}</p>
+                                    <p class="card-text text-success">{{active.description|default_if_none:"Not given"}}</p>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <form method = "POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="projectID" value="{{active.id}}">
+                                <button type="submit" class="btn btn-success top-buffer"> Finish project !</button>
+                                </form>
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <div class="col-md-12 text-center">
+                        <div class="alert alert-info text-center" role="alert">
+                        <p><h2>There are not any active projects </h2></p>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>       
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock maincontent%}
+
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Departments/department.js' %}"></script>
+{% endblock additionalscript %}

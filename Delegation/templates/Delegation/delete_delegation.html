@@ -1,0 +1,92 @@
+{% extends 'Main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+<title>Delegation - delete delegation</title>
+{% endblock title %}
+
+{% block maincontent%}
+
+
+<div id='del5' class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header text-center text-white bg-dark">
+                <h4 class="card-title">Delegations</h4>
+            </div>
+            <div class="card-body">
+                <div class="row text-center d-flex justify-content-around">
+                {% for delegation in delegations%}
+                <div class="col-sm-6 bottom-buffer">
+                    <div class="card">
+                        <div class="card-body bg-dark"> 
+                            <h4 class="card-title text-white">Delegation: </h4>
+                            <p class="card-title text-danger">{{delegation}}</p>
+
+                            <h6 class="card-text text-white">Employees:</h6>
+                            <p class="card-text">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-light show-button dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="
+                                    Employees already registered are not shown">
+                                        Click to unfold 
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        {% for employee in delegation.employee.all %}
+                                            <button class="dropdown-item">
+                                                <div>
+                                                    {{ employee }}
+                                                </div>
+                                            </button>    
+                                        {% endfor %}
+                                    </div>    
+                                </div>
+                            </p>
+
+                            <h6 class="card-text text-white">Dates:</h6>
+                            <p class="card-text">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-light show-button dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="
+                                    Employees already registered are not shown">
+                                        Click to unfold 
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        {% for date in delegation.date.all %}
+                                            <button class="dropdown-item">
+                                                <div>
+                                                    {{ date }}
+                                                </div>
+                                            </button>    
+                                        {% endfor %}
+                                    </div>    
+                                </div>
+                            </p>
+                        
+                            <div class="row d-flex justify-content-center">
+                                <form method = "POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="delegationID" value="{{delegation.id}}">
+                                <button type="submit" class="btn btn-danger top-buffer"> Finish project !</button>
+                                </form>
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <div class="col-md-12 text-center">
+                        <div class="alert alert-info text-center" role="alert">
+                        <p><h2>There are not any active projects </h2></p>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>       
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock maincontent%}
+
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Departments/department.js' %}"></script>
+{% endblock additionalscript %}

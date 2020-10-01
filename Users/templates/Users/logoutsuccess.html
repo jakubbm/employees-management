@@ -1,0 +1,29 @@
+{% extends 'Users/base.html' %}
+{% load static %}
+
+
+{% block title %}
+  <title>Logged out</title>
+{% endblock title %}
+
+{% block typeofbox %}
+<div class="center-box-small">
+{% endblock typeofbox %}
+
+{% block box2 %}
+
+<div class = "box2">
+  <h1 class="bottom-buffer">You have been successfully logged out</h1>
+  <form action="{% url 'Users:login' %}">
+    <button class="button-submit">Log in</button> 
+  </form>
+</div>
+
+{% endblock box2 %}
+
+
+
+
+
+
+

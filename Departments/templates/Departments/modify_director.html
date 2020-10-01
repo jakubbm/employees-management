@@ -1,0 +1,102 @@
+{% extends 'Main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<title>Department - Modify director</title>
+{% endblock title %}
+
+{% block maincontent%}
+
+<div id="dep15" class="content">
+    <div class="container-fluid">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success'%}
+            <div class="row d-flex justify-content-center top-buffer">
+                <div class="col-md-12">
+                    <div class="alert alert-success text-center" role="alert">
+                    {{message}}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if message.tags == 'warning'%}
+        <div class="row d-flex justify-content-center top-buffer">
+            <div class="col-md-12">
+                <div class="alert alert-danger text-center" role="alert">
+                {{message}}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h4 class="card-title">Add director to department:</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method= "POST">
+                                {% csrf_token %}
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Select employee:</label>
+                                            {{form_add.employee|add_class:"form-control"}}
+                                        </div> 
+                                    </div> 
+                                    <div class="col-md-12">
+                                        <div class="form-group"> 
+                                            <label>Select department:</label>
+                                            {{form_add.department|add_class:"form-control"}}
+                                        </div>
+                                    </div>  
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Add</button>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h4 class="card-title">Delete director from department:</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method= "POST">
+                                {% csrf_token %}
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Select deparment:</label>
+                                            {{form_delete.department|add_class:"form-control"}}
+                                        </div> 
+                                    </div> 
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Delete</button>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock maincontent%}
+
+

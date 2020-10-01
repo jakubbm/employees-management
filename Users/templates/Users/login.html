@@ -1,0 +1,69 @@
+{% extends 'Users/base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>EM - login</title>
+{% endblock title %}
+
+{% block typeofbox %}
+<div class="center-box-small">
+{% endblock typeofbox %}
+
+{% block box1%}
+Login
+{% endblock box1 %}}
+
+
+{% block box2 %}
+<div class = "box2">
+  <div class="form">
+    <form method="POST">
+      {% csrf_token %}
+      {% if messages %}
+        <p>Username</p>
+        <input type="text" class="input invalid" name="username">
+        {% for message in messages%}
+          <div class="error">{{message}}</div>
+        {% endfor %}
+
+        <p>Password</p>
+        <input type="password" class="input invalid" name="password">
+        {% for message in messages%}
+          <div class="error">{{message}}</div>
+        {% endfor %}
+
+      {% else %}
+        <p>Username</p>
+        <input type="text" class="input" name="username">
+        <p>Password</p>
+        <input type="password" class="input" name="password">
+      {% endif %}
+
+
+      <input type="submit" class="button-submit" value="Sign In">
+    </form>
+  </div>
+</div>
+{% endblock box2 %}
+
+
+  {% block box31 %}
+  Forget your password ? <br />
+  <form action="{% url 'Users:reset_password' %}">
+  <button type="submit">Reset password</button> 
+  </form>
+  {% endblock box31 %}
+
+
+  {% block box32 %}
+  Don`t have an account ? <br />
+  <form action="{% url 'Users:register' %}">
+  <button type="submit">Register</button> 
+  </form>
+  {% endblock box32 %}
+
+
+
+
+

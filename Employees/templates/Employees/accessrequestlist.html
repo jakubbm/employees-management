@@ -1,0 +1,130 @@
+{% extends 'Main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<title>EM - List of employees requests</title>
+{% endblock title %}
+
+
+{% block maincontent%}
+<div id='addi2' class="content">
+    <div class="container-fluid">
+
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'warning'%}
+            <div class="row d-flex justify-content-center top-buffer">
+                <div class="col-md-12">
+                    <div class="alert alert-danger text-center" role="alert">
+                    {{message}}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+        <div class="row d-flex justify-content-center top-buffer">
+            <div class="col-md-12">
+                <div class="alert alert-success text-center" role="alert">
+                {{message}}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h5 class="card-title">List of active employees requests</h5>
+                    </div>
+                    <div class="card-body">   
+                        <table class="table">
+                            <thead class="text-center thead-dark">
+                            <tr>
+                                <th scope="col">Employee:</th>
+                                <th scope="col">Group:</th>
+                                <th scope="col">Date of submission:</th>
+                                <th scope="col">Finish:</th>
+                            </tr>
+                            </thead>
+                            <tbody class="text-center">
+                            {% for active in active_requests %}    
+                                <tr class="table-secondary">
+                                    <td class="employee">{{active.employee}}</td>
+                                    <td class="group">{{active.group}}</td>
+                                    <td>{{active.date}}</td>
+                                    <td>                                        
+                                        <button type="button" rel="tooltip" title="Confirm" class="btn btn-success finish-request">
+                                            Click to finish
+                                            <form method= "POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="requestID" value="{{active.id}}">
+                                            </form>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4">
+                                    <div class="alert alert-success text-center" role="alert">
+                                        <p><h2>There are not any active requests </h2></p>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row top-buffer">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center text-white bg-dark">
+                        <h5 class="card-title">List of finished requests:</h5>
+                    </div>
+                    <div class="card-body">   
+                        <table class="table">
+                            <thead class="text-center thead-dark">
+                              <tr>
+                                <th scope="col">Employee:</th>
+                                <th scope="col">Group:</th>
+                                <th scope="col">Date of submission:</th>
+                                <th scope="col">Finished by:</th>
+                              </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                {% for finished in finished_requests %}
+                              <tr class="table-success">
+                                <td>{{finished.employee}}</td>
+                                <td>{{finished.group}}</td>
+                                <td>{{finished.date}}</td>
+                                <td>{{finished.finished_by}}</td>
+                              </tr>
+                              {% empty %}
+                              <tr>
+                                  <td colspan="4">
+                                      <div class="alert alert-success text-center" role="alert">
+                                          <p><h2>There are not any finished requests younger than 14 days </h2></p>
+                                      </div>
+                                  </td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock maincontent%}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{% static 'js/Employees/employee.js' %}"></script>
+{% endblock additionalscript %}

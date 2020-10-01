@@ -1,0 +1,64 @@
+{% extends 'Users/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+
+{% block title %}
+<title>EM - register</title>
+{% endblock title %}
+
+
+{% block typeofbox %}
+<div class="center-box-big">
+{% endblock typeofbox %}
+
+
+{% block box1%}
+Register
+{% endblock box1 %}}
+
+
+{% block box2 %}
+<div class = "box2">
+    <form method="POST">
+      {% csrf_token %}
+        {% for field in register_form%}
+        <p>{{field.label}}</p>
+          {% if field.errors %}
+            {{field|add_class:"input invalid"}}
+              <div class="error">
+              {% for error in field.errors %}
+                {{ error }}
+              {% endfor %}
+                </div>
+          {% else %}
+            {{field|add_class:"input"}}
+          {% endif %}
+        {% endfor %}
+
+      <input type="submit" class="button-submit" value="Sign Up">
+    </form>
+</div>
+{% endblock box2 %}
+
+
+  {% block box31 %}
+  <h7>Forget your password ?</h7>
+
+  <form action="{% url 'Users:reset_password' %}">
+    <button type="submit">Reset password</button> 
+    </form>
+  {% endblock box31 %}
+
+
+  {% block box32 %}
+  Already have an account ? <br />
+  <form action="{% url 'Users:login' %}">
+    <button type="submit">Log In</button>
+    </form>
+  {% endblock box32 %}
+
+
+
+
