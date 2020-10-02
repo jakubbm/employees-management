@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
-from django.core.files.uploadedfile import InMemoryUploadedFile
-import io
-from PIL import Image
+from django_resized import ResizedImageField
 
 from Departments.models import Department
 
@@ -73,7 +71,7 @@ class Employee(models.Model):
     diploma_number = models.CharField(max_length=40, null=True, blank=True)
     date_of_employment = models.DateField(null=True, blank=True)
     status = models.BooleanField(default=True)
-    profile_picture = models.ImageField(upload_to='Employees/profiles_pictures',
+    profile_picture = ResizedImageField(upload_to='Employees/profiles_pictures',
                                         default='Employees/profiles_pictures/default.png')
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
@@ -81,16 +79,6 @@ class Employee(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
-    def save(self, *args, **kwargs):
-        if self.profile_picture:
-            image = Image.open(io.StringIO.StringIO(self.profile_picture.read()))
-            image.thumbnail((300,300), Image.ANTIALIAS)
-            output = io.StringIO.StringIO()
-            image.save(output, format='PNG', quality=75)
-            output.seek(0)
-            self.profile_picture = InMemoryUploadedFile(output,'ImageField', "%s.png" %self.profile_picture.last_name, 'image/png', output.len, None)
-        super(Employee, self).save(*args, **kwargs)
 
 
 class Badge(models.Model):
