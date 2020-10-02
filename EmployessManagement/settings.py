@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('KEY', True)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'employees--management.herokuapp.com']
 
@@ -167,9 +167,9 @@ REST_FRAMEWORK = {
 }
 
 #S3 BUCKETS CONFIG
-AWS_ACCESS_KEY_ID = os.environ.get('S3_KEY')
-AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('S3_NAME')
+AWS_ACCESS_KEY_ID = os.environ.get('S3_KEY', True)
+AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET', True)
+AWS_STORAGE_BUCKET_NAME = os.environ.get('S3_NAME', True)
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_REGION_NAME = "eu-west-3"
