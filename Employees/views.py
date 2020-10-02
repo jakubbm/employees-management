@@ -41,8 +41,6 @@ def editprofile(request):
             form_user = EditUserForm(request.POST, instance=request.user)
             if form_user.is_valid():
                 form_user.save()
-                messages.success(request, "Your employee profile has been successfully edited")
-                return redirect('Employees:profile')
 
         messages.success(request, "Your employee profile has been successfully edited")
         return redirect('Employees:profile')
