@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from io import BytesIO
+import io
 from PIL import Image
 
 from Departments.models import Department
@@ -83,12 +83,13 @@ class Employee(models.Model):
         return f"{self.first_name} {self.last_name}"
 
     def save(self, *args, **kwargs):
-        imageTemproary = Image.open(self.profile_picture)
-        outputIoStream = BytesIO()
-        imageTemproaryResized = imageTemproary.resize( (300,300) )
-        imageTemproaryResized.save(outputIoStream , format='PNG', quality=85)
-        outputIoStream.seek(0)
-        self.uploadedImage = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" %self.uploadedImage.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
+        if self.profile_picture:
+            image = Image.open(io.StringIO.StringIO(self.profile_picture.read()))
+            image.thumbnail((300,300), Image.ANTIALIAS)
+            output = io.StringIO.StringIO()
+            image.save(output, format='PNG', quality=75)
+            output.seek(0)
+            self.profile_picture = InMemoryUploadedFile(output,'ImageField', "%s.png" %self.profile_picture.last_name, 'image/png', output.len, None)
         super(Employee, self).save(*args, **kwargs)
 
 
