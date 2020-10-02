@@ -144,10 +144,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-#for MEDIA
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
-
 DATE_INPUT_FORMATS = ['%d/%m/%Y']
 TIME_INPUT_FORMATS = ['%H:%M']
 
@@ -181,3 +177,6 @@ AWS_S3_REGION_NAME = "eu-west-3"
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+#for MEDIA
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
