@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
-
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from io import BytesIO
 from PIL import Image
+
 from Departments.models import Department
 
 
@@ -81,13 +83,13 @@ class Employee(models.Model):
         return f"{self.first_name} {self.last_name}"
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        img = Image.open(self.profile_picture.path)
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.profile_picture.path)
-            super().save(*args, **kwargs)
+        imageTemproary = Image.open(self.profile_picture)
+        outputIoStream = BytesIO()
+        imageTemproaryResized = imageTemproary.resize( (300,300) )
+        imageTemproaryResized.save(outputIoStream , format='PNG', quality=85)
+        outputIoStream.seek(0)
+        self.uploadedImage = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" %self.uploadedImage.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
+        super(Employee, self).save(*args, **kwargs)
 
 
 class Badge(models.Model):
