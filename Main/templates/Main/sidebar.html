@@ -3,7 +3,7 @@
 <nav class="sidebar">
   <div class="sidebar-menu">
     <div class="profile">
-      <img src="{{ request.user.employee.profile_picture }}" alt="">
+      <img src="{{ request.user.employee.profile_picture.url }}" alt="">
       <p>{{ request.user.employee.first_name}} {{ request.user.employee.last_name}}</p>
     </div>
 
