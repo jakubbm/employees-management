@@ -7,7 +7,7 @@
 <h3 align="center">Live Demo: https://employees--management.herokuapp.com/index </h3>
 <br />
 <h4 align="center">Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5>
-<br /><br />
+<br />
 
 <p align="center">
 Konto z uprawnieniami: <b>Director</b> <br />
