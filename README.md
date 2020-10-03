@@ -2,7 +2,7 @@
 <h1 align="center"><strong>[PL]</strong></h2>
 
 <h2 align="center">Projekt: „Employees Management” ma na celu wspomóc codzienną prace biurową firmy.</h3>
-
+<br /><br />
 <h4 align="center">Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5>
 
 <p align="center">
