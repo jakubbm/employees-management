@@ -3,7 +3,7 @@
 
 <h2 align="center">Projekt: „Employees Management” ma na celu wspomóc codzienną prace biurową firmy.</h3>
 
-<p ><h5>Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5></P>
+<p align="center"><h5>Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5>
 Konto z uprawnieniami **Director**<br />
 log: albert<br />
 pass: samsung666<br />
