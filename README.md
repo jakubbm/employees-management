@@ -12,7 +12,7 @@ pass: samsung666<br />
 </p>
 
 <p align="center">
-Konto z uprawnieniami: **Manager** <br />
+ Konto z uprawnieniami: <b>Manager</b> <br />
 log: frank<br />
 pass: samsung888<br />
 </p>
