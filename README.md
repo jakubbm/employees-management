@@ -3,10 +3,10 @@
 
 <h2 align="center">Projekt: „Employees Management” ma na celu wspomóc codzienną prace biurową firmy.</h3>
 
-<h5 align="center">Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5>
+<h4 align="center">Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5>
 
 <p align="center">
-Konto z uprawnieniami: **Manager** <br />
+Konto z uprawnieniami: <b>Director</b> <br />
 log: albert<br />
 pass: samsung666<br />
 </p>
@@ -18,7 +18,7 @@ pass: samsung888<br />
 </p>
 
 <p align="center">
-Konto z uprawnieniami: **Standard**<br />
+Konto z uprawnieniami: <b>Standard</b><br />
 log: emma<br />
 pass: samsung888<br />
  </p>
