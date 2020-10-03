@@ -5,7 +5,7 @@
 
 <h5 align="center">Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5>
 
-<p>
+<p align="center">
 Konto z uprawnieniami: **Director** <br />
 log: albert<br />
 pass: samsung666<br />
