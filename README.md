@@ -2,12 +2,13 @@
 <h1 align="center"><strong>[PL]</strong></h2>
 
 <h2 align="center">Projekt: „Employees Management” ma na celu wspomóc codzienną prace biurową firmy.</h3>
-<br /><br />
+<br />
 
 <h3 align="center">Live Demo: https://employees--management.herokuapp.com/index </h3>
-
+<br />
 <h4 align="center">Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5>
 <br /><br />
+
 <p align="center">
 Konto z uprawnieniami: <b>Director</b> <br />
 log: albert<br />
