@@ -3,6 +3,20 @@
 
 <h2 align="center">Projekt: „Employees Management” ma na celu wspomóc codzienną prace biurową firmy.</h3>
 
+Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:
+Konto z uprawnieniami **Director**
+log: albert
+pass: samsung666
+
+Konto z uprawnieniami **Manager** 
+log: frank
+pass: samsung888
+
+Konto z uprawnieniami **Standard**
+log: emma
+pass: samsung888
+Opis uprawnień znajduję sie na dole tego dokumentu.
+
 <br />
 <h3>Funkcjonalność serwisu:</h4>
 <br />
