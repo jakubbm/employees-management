@@ -6,24 +6,24 @@
 <h5 align="center">Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5>
 
 <p align="center">
-Konto z uprawnieniami: **Director** <br />
+Konto z uprawnieniami: **Manager** <br />
 log: albert<br />
 pass: samsung666<br />
 </p>
 
-<p>
+<p align="center">
 Konto z uprawnieniami: **Manager** <br />
 log: frank<br />
 pass: samsung888<br />
 </p>
 
-<p>
+<p align="center">
 Konto z uprawnieniami: **Standard**<br />
 log: emma<br />
 pass: samsung888<br />
  </p>
  
-<p>Opis uprawnień znajduję sie na dole tego dokumentu. </p><br />
+<p align="center">Opis uprawnień znajduję sie na dole tego dokumentu. </p><br />
 
 
 <br />
