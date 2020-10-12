@@ -15,7 +15,7 @@ class WorkTime(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True, blank=True)
     date = models.ForeignKey(Date, on_delete=models.CASCADE, null=True, blank=True)
     start_work = models.TimeField(null=True, blank=True)
-    end_work = models.TimeField(default = None)
+    end_work = models.TimeField(null=True, blank=True)
     hours_in_day = models.DecimalField(null=True, blank=True, max_digits=4, decimal_places=2)
     start_ip_address = models.GenericIPAddressField(null=True, blank=True)
     end_ip_address = models.GenericIPAddressField(null=True, blank=True)

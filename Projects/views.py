@@ -56,7 +56,7 @@ def createproject(request):
                 return redirect('Projects:projects')
             else:
                 messages.error(request, f'Something went wrong, please try again.')
-                return redirect('Projects:create_project')
+
         else:
             messages.warning(request, 'You don`t have permission')
             return redirect('Projects:projects')

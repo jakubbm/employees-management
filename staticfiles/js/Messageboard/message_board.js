@@ -4,6 +4,7 @@ const container =  document.querySelector("#content");
 const buttonPost  = document.querySelector("#post");
 const userId = document.getElementById('user_id').textContent;
 const csrftoken = getCookie('csrftoken');
+let messagesNumber = 0;
 
 
 function getCookie(name) {
@@ -21,11 +22,13 @@ function getCookie(name) {
   return cookieValue;
 }
 
-function getData(){
+function getFirstData(){
   fetch(urlGet)
       .then((resp) => resp.json())
       .then(function(data){
       let messages = data;
+      messagesNumber = data.length
+      console.log(messagesNumber);
       container.innerHTML='';
       for (i in messages){
           let date = messages[i].date.slice(0,10)
@@ -35,14 +38,46 @@ function getData(){
               <div class="box ${backgroundColor}">
                 <img src="${messages[i].profile_picture}" alt="">
                 <div class="box-content">
-                  <div class="box-title">${messages[i].employee_firstname} ${messages[i].employee_lastname} ${date} ${time}</div>
+                  <div class="box-title">${messages[i].employee_firstname} ${messages[i].employee_lastname}</div>
                   <div class="message">${messages[i].message}</div>
+                </div>
+                <div class="datebox">
+                  ${date} ${time}
                 </div>
               </div>`
         container.insertAdjacentHTML("afterbegin",content);
       };
     })
   }
+
+
+  function getNextData(){
+    fetch(urlGet)
+        .then((resp) => resp.json())
+        .then(function(data){
+        let messages = data;
+        let messagesNumberCheck = messages.length
+        if (messagesNumber !== messagesNumberCheck){
+          for (let i=messagesNumber; i<messagesNumberCheck; i++){
+            let date = messages[i].date.slice(0,10)
+            let time = messages[i].date.slice(11,19)
+            let backgroundColor = (i % 2 == 0) ? "evenpool":"oddpool";
+            let content = `
+                <div class="box ${backgroundColor}">
+                  <img src="${messages[i].profile_picture}" alt="">
+                  <div class="box-content">
+                    <div class="box-title">${messages[i].employee_firstname} ${messages[i].employee_lastname}</div>
+                    <div class="message">${messages[i].message}</div>
+                  </div>
+                  <div class="datebox">
+                    ${date} ${time}
+                  </div>
+                </div>`
+          container.insertAdjacentHTML("afterbegin",content);
+        };
+        messagesNumber = messagesNumberCheck
+        }})}
+
 
   function sendData(){
     let input = document.getElementById("input")
@@ -56,12 +91,13 @@ function getData(){
       },
       body:JSON.stringify({'message':message,'userId':userId})
     });
-    getData();
+    getFirstData();
   }
 
 
-getData();
-setInterval(getData,3000);
+getFirstData();
+setInterval(getNextData,5000);
+
 buttonPost.addEventListener("click",sendData);
 document.addEventListener("keypress",e => {
   if (e.key == "Enter"){

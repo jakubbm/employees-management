@@ -107,7 +107,7 @@ def main(request):
         form = TodoForm(request.POST)
         if form.is_valid():
             sentence = form.cleaned_data['sentence']
-            post = Todo.objects.create(sentence=sentence, employee=employee)
+            post = Todo.objects.create(sentence=sentence, employee=employee, date_created=datetime.now())
             post.save()
             return redirect('Main:main')
 
@@ -117,10 +117,14 @@ def main(request):
         return redirect('Main:main')
 
     elif request.method == 'POST' and 'update' in request.POST:
-        updated_object = Todo.objects.get(id=request.POST['update'])
-        updated_object.sentence = request.POST['update-value']
-        updated_object.save()
-        return redirect('Main:main')
+        if request.POST['update-value'] !="":
+            updated_object = Todo.objects.get(id=request.POST['update'])
+            updated_object.sentence = request.POST['update-value']
+            updated_object.date_created = datetime.now()
+            updated_object.save()
+            return redirect('Main:main')
+        else:
+            return redirect('Main:main')
 
     else:
         form = TodoForm()

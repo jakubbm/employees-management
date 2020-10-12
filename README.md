@@ -2,6 +2,33 @@
 <h1 align="center"><strong>[PL]</strong></h2>
 
 <h2 align="center">Projekt: „Employees Management” ma na celu wspomóc codzienną prace biurową firmy.</h3>
+<br />
+
+<h3 align="center">Live Demo: https://employees--management.herokuapp.com/index </h3>
+<br />
+<h4 align="center">Podczas testowaniu serwisu, możesz stworzyć konto nowego użytkownika lub skorzystać z jednego z tych:</h5>
+<br />
+
+<p align="center">
+Konto z uprawnieniami: <b>Director</b> <br />
+log: albert<br />
+pass: samsung666<br />
+</p>
+
+<p align="center">
+ Konto z uprawnieniami: <b>Manager</b> <br />
+log: frank<br />
+pass: samsung888<br />
+</p>
+
+<p align="center">
+Konto z uprawnieniami: <b>Standard</b><br />
+log: emma<br />
+pass: samsung888<br />
+ </p>
+ 
+<p align="center">Opis uprawnień znajduję sie na dole tego dokumentu. </p><br />
+
 
 <br />
 <h3>Funkcjonalność serwisu:</h4>

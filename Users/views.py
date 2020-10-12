@@ -13,7 +13,7 @@ def register(request):
         register_form = CreateUserForm(request.POST)
         if register_form.is_valid():
             register_form.save()
-            return redirect('Users:login')
+            return redirect('Users:reg_success')
 
     context = {'register_form': register_form}
     return render(request, 'Users/register.html', context)
@@ -38,6 +38,10 @@ def login(request):
 def logout(request):
     django_logout(request)
     return redirect('Users:logout_success')
+
+
+def register_success(request):
+    return render(request, 'Users/register_success.html')
 
 
 @login_required
